@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>EcoPoço — Reserva Florestal do Poço Escuro</title>
+    <link rel="icon" type="image/png" href="img/Logotipos/Logo_tema_claro.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="wrap">
+        <a class="brand" href="#inicio" aria-label="EcoPoço, voltar ao início"
+          ><img class="brand-light" src="img/Logotipos/Logo_tema_claro.png" alt="" />
+          <img class="brand-dark" src="img/Logotipos/Logo_tema_escuro.png" alt=""
+        /></a>
+        <ul id="nav-links">
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#historia">História</a></li>
+          <li><a href="#vida">Fauna e flora</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#local">Localização</a></li>
+          <li><a href="#trilhas">Trilhas</a></li>
+          <li><a href="#visita">Agende</a></li>
+          <li><a href="#equipe">Equipe</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a class="btn main nav-visit" href="#visita">Visitar</a>
+          <button class="nav-control" id="theme-toggle" type="button" aria-label="Tema escuro" aria-pressed="false">
+            <span class="theme-moon" aria-hidden="true">☾</span>
+            <span class="theme-sun" aria-hidden="true">☀</span>
+          </button>
+          <button class="nav-control" id="menu-toggle" type="button" aria-controls="nav-links" aria-expanded="false">
+            Menu
+          </button>
+        </div>
+      </div>
+      <div id="gauge" aria-hidden="true"><i></i></div>
+    </nav>
+
+    <header id="inicio">
+      <div class="wrap hero">
+        <div>
+          <h2>Poço Escuro: uma floresta no meio da cidade</h2>
+          <p class="lead">
+            A Reserva Florestal do Poço Escuro guarda 17 hectares de mata ciliar
+            e as nascentes do Rio Verruga em Vitória da Conquista. Conheça,
+            valorize e preserve.
+          </p>
+          <div class="cta">
+            <a class="btn main" href="#historia">Conhecer a reserva</a
+            ><a class="btn alt" href="#visita">Agendar visita</a>
+          </div>
+        </div>
+        <img
+          class="logo"
+          src="img/Local/Vista_aerea.webp"
+          alt="Vista aérea da mata da reserva cercada pelos bairros da cidade"
+        />
+      </div>
+    </header>
+
+    <section id="historia" class="tint">
+      <div class="wrap">
+        <h2 class="rv" style="margin-bottom: 50px;">Poço Escuro: O berço de águas e memórias de Vitória da Conquista</h2>
+        <div class="hist-overview">
+          <ol class="hist">
+            <li class="hist-card rv">
+              <h3>As nascentes e o Arraial</h3>
+              <p>Na Serra do Periperi nascem as principais fontes do Rio Verruga, em torno das quais cresceu o Arraial da Conquista. A sombra da mata sobre as águas profundas deu nome ao Poço Escuro.</p>
+            </li>
+            <li class="hist-card rv">
+              <h3>A água no cotidiano da cidade</h3>
+              <p>Até meados da década de 1970, as nascentes abasteciam a população. Aguadeiros e famílias buscavam água, enquanto lavadeiras trabalhavam às margens do riacho.</p>
+            </li>
+            <li class="hist-card rv">
+              <h3>A criação da reserva em 1996</h3>
+              <p>Com a expansão urbana, a mata tornou-se o último grande remanescente nativo da cidade. Em 1996, a reserva foi criada e integrada ao Parque Municipal da Serra do Periperi.</p>
+            </li>
+            <li class="hist-card rv">
+              <h3>O Poço Escuro hoje</h3>
+              <p>Aberta à comunidade, a reserva preserva nascentes e espécies nativas e recebe atividades de pesquisa e educação ambiental.</p>
+            </li>
+          </ol>
+          <div class="stats rv">
+            <div><strong data-n="17">0</strong><span>hectares de mata ciliar</span></div>
+            <div><strong data-n="3">0</strong><span>biomas reunidos: Mata Atlântica, Mata de Cipó e Caatinga</span></div>
+            <div><strong data-n="3">0</strong><span>trilhas oficiais</span></div>
+          </div>
+        </div>
+        <img class="pic history-photo rv" src="img/Local/inicio_parque.webp" alt="Início do parque do Poço Escuro" />
+      </div>
+    </section>
+
+    <section id="vida">
+      <div class="wrap">
+        <h2 class="rv">Quem vive e cresce aqui</h2>
+        <p class="lead rv">
+          A mata abriga mamíferos, aves, répteis e anfíbios, além de árvores,
+          arbustos, orquídeas, cipós e bromélias. Estas são algumas das espécies
+          registradas.
+        </p>
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-t="fauna">Fauna</button
+          ><button role="tab" aria-selected="false" data-t="flora">
+            Flora
+          </button>
+        </div>
+        <ul class="sp" id="sp"></ul>
+        <p class="note">
+          Fotos: Disponíveis na internet
+        </p>
+      </div>  
+    </section>
+
+    <section id="galeria" class="tint" aria-labelledby="galeria-titulo">
+      <div class="wrap">
+        <div
+          class="car gallery-layout rv"
+          role="region"
+          aria-roledescription="carrossel"
+          aria-label="Fotos da reserva"
+        >
+          <div class="trk" id="trk">
+            <figure>
+              <img
+                src="img/Local/Riacho_1.webp"
+                alt="Água corrente entre árvores de tronco claro"
+              />
+              <figcaption>Água que nasce na mata</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="img/Local/Passarela.webp"
+                alt="Passarela de madeira entre a vegetação"
+              />
+              <figcaption>Passarela na trilha</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="img/Local/Placas.webp"
+                alt="Placas informativas de fauna e flora na trilha"
+              />
+              <figcaption>Placas de fauna e flora</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="img/Local/Vista_aerea.webp"
+                alt="Vista aérea da mata cercada pela cidade"
+              />
+              <figcaption>A mata vista de cima</figcaption>
+            </figure>
+            <figure>
+              <img src="img/Local/Visitantes.webp" alt="Estudantes em visita guiada" />
+              <figcaption>Visita guiada</figcaption>
+            </figure>
+            <figure>
+              <img src="img/Local/Po%C3%A7o.webp" alt="" loading="lazy" />
+              <figcaption>Poço Escuro</figcaption>
+            </figure>
+            <figure>
+              <img src="img/Local/ponte.webp" alt="" loading="lazy" />
+              <figcaption>Ponte na reserva</figcaption>
+            </figure>
+            <figure>
+              <img src="img/Local/passagem.webp" alt="" loading="lazy" />
+              <figcaption>Passagem na trilha</figcaption>
+            </figure>
+            <figure>
+              <img src="img/Local/Visitantes_2.webp" alt="" loading="lazy" />
+              <figcaption>Visitantes na reserva</figcaption>
+            </figure>
+          </div>
+          <div class="gallery-copy">
+            <h2 id="galeria-titulo">Galeria</h2>
+            <p class="lead">Nascentes, trilhas e visitas guiadas na Reserva do Poço Escuro.</p>
+          </div>
+          <div class="ctl">
+            <button id="pv" aria-label="Foto anterior">‹</button
+            ><span id="cn">1 / 9</span
+            ><button id="nx" aria-label="Próxima foto">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="local">
+      <div class="wrap">
+        <h2 class="rv" style="margin-bottom: 30px">Como chegar</h2>
+        <p class="lead rv">
+          O Poço Escuro fica no Parque Municipal da Serra do Periperi, entre os
+          bairros Guarani e Petrópolis/Cruzeiro. O acesso principal é pela Rua
+          Henriqueta Prates, no bairro Petrópolis.
+        </p>
+        <div class="two rv">
+          <figure>
+            <img
+              class="pic"
+              src="img/Local/Mapa_google.webp"
+              alt="Imagem de satélite da mata cercada pelos bairros"
+            />
+            <figcaption>Localização da reserva</figcaption>
+          </figure>
+          <figure>
+            <img
+              class="pic"
+              src="img/Local/Entrada.webp"
+              alt="Portal de entrada com grafites de preguiça, cutia, macaco e pássaro"
+            />
+            <figcaption>Acesso principal</figcaption>
+          </figure>
+        </div>
+        <p class="map-link">
+          <a
+            class="btn alt"
+            target="_blank"
+            rel="noopener"
+            href="https://www.google.com/maps/search/?api=1&query=Rua+Henriqueta+Prates+Vit%C3%B3ria+da+Conquista+BA"
+            >Abrir no Google Maps</a
+          >
+        </p>
+      </div>
+    </section>
+
+    <section id="trilhas" class="tint">
+      <div class="wrap trails">
+        <div class="rv">
+          <h2 class="trails-title"><span class="big">3</span> trilhas oficiais</h2>
+          <p class="lead">
+            Caminhos dentro da mata, usados em visitas guiadas por escolas,
+            universidades e grupos de pesquisa.
+          </p>
+          <ul class="tr">
+            <li><i style="background: #7a1a1a"></i>Trilha 01<b>650 m</b></li>
+            <li><i style="background: #d9b800"></i>Trilha 02<b>570 m</b></li>
+            <li><i style="background: #8a8a8a"></i>Trilha 03<b>520 m</b></li>
+            <li><i style="background: var(--water)"></i>Rio Verruga</li>
+          </ul>
+        </div>
+        <img
+          class="pic map rv"
+          src="img/Local/Mapa_trilha.webp"
+          alt="Mapa das trilhas 01, 02 e 03 da reserva e do Rio Verruga"
+          />
+      </div>
+    </section>
+
+    <section id="visita">
+      <div class="wrap">
+        <h2 class="rv" style="margin-bottom: 50px">Agende sua visita</h2>
+        <p class="lead rv">
+        <ol class="steps rv">
+          <li>
+            <b>Consulte as datas pelo WhatsApp</b>Use o botão de WhatsApp
+            abaixo para falar com o Módulo de Educação Ambiental da SEMMA
+            pelo número (77) 3229-3591 e consultar os horários disponíveis.
+          </li>
+          <li>
+            <b>Peça autorização por e-mail</b>Use o botão de e-mail abaixo
+            para enviar à SEMMA um ofício com a data, o turno, o horário,
+            o número de participantes e o motivo da visita.
+          </li>
+          <li>
+            <b>Solicite o acompanhamento na trilha</b>Após receber a autorização
+            da SEMMA, entregue um ofício ao GAMA na
+            sede da Guarda Municipal (Rua Dom Climério de Andrade, 108,
+            Recreio).
+          </li>
+          <li>
+            <b>No dia</b>Palestra na Sala Verde, na Praça da Juventude, e depois
+            trilha com a Guarda Municipal Ambiental.
+          </li>
+        </ol>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 50px">
+          <a
+            class="btn main"
+            target="_blank"
+            rel="noopener"
+            href="https://wa.me/557732293591?text=Ol%C3%A1!%20Quero%20agendar%20uma%20visita%20%C3%A0%20Reserva%20do%20Po%C3%A7o%20Escuro."
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.2 14.2c-.2.6-1.300 1.200-1.800 1.200-.5.1-1 .2-3.300-.7-2.800-1.100-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 2c.1.200.1.300 0 .5l-.4.600c-.1.200-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.100 1 2.100 1.300 2.400 1.400.3.100.4.100.6-.1l.8-1c.2-.3.400-.2.600-.1l1.900.9c.3.100.5.200.5.300.1.200.1.800-.1 1.300Z"
+              /></svg
+            >WhatsApp</a
+          >
+          <a
+            class="btn alt"
+            href="mailto:semma.moduloambiental@gmail.com?subject=Agendamento%20de%20visita%20-%20Po%C3%A7o%20Escuro"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7.200L4.500 7v1.800L12 14l7.500-5.200V7L12 12.200Z"
+              /></svg
+            >E-mail</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="equipe" class="tint">
+      <div class="wrap">
+        <h2 class="rv">Quem fez este projeto</h2>
+        <p class="lead rv">
+          Projeto de extensão universitária para dar visibilidade a um
+          patrimônio natural de Vitória da Conquista.
+        </p>
+        <article class="advisor rv">
+          <div class="portrait"><img src="img/Equipe/Thaiane.webp" alt="" loading="lazy" /></div>
+          <div class="advisor-copy">
+            <h3>Thaiane Dutra</h3>
+            <p>Orientadora, advogada, professora mestre em Linguística (2018) e doutoranda em Memória, Linguagem e Sociedade pela Universidade Estadual do Sudoeste da Bahia (UESB). Bacharel em Direito pela Universidade Estadual do Sudoeste da Bahia (2009). Especialização em Direito Civil e Processo Civil. É avaliadora ad hoc INEP/MEC para os Cursos de graduação em Direito. Líder do Grupo de Estudos e Análise de Dados do Poder Judiciário - GEADPJ e do Laboratório de Análise de Dados do Poder Judiciário LADPJ, inscrito no CNPq.</p>
+          </div>
+        </article>
+        <ul class="team">
+          <li class="rv">
+            <div class="portrait"><img src="img/Equipe/Daniela.webp" alt="" loading="lazy" /></div>
+            <h3>Daniela Ribeiro</h3>
+            <p>Graduanda em Direito pela Unex</p>
+          </li>
+          <li class="rv">
+            <div class="portrait"><img src="img/Equipe/Inoc%C3%AAncio.webp" alt="" loading="lazy" /></div>
+            <h3>Inocêncio de Souza</h3>
+            <p>Graduando em Direito pela Unex</p>
+          </li>
+          <li class="rv">
+            <div class="portrait"><img src="img/Equipe/Hugo.webp" alt="" loading="lazy" /></div>
+            <h3>Hugo Lacerda</h3>
+            <p>Graduando em Direito pela Unex</p>
+          </li>
+          <li class="rv">
+            <div class="portrait"><img src="img/Equipe/Franciele.webp" alt="" loading="lazy" /></div>
+            <h3>Francielle Sousa</h3>
+            <p>Graduanda em Direito pela Unex</p>
+          </li>
+          <li class="rv">
+            <div class="portrait"><img src="img/Equipe/Kauany.webp" alt="" loading="lazy" /></div>
+            <h3>Kauany Vitória</h3>
+            <p>Graduanda em Direito pela Unex</p>
+          </li>
+          <li class="rv">
+            <div class="portrait"><img src="img/Equipe/Daniella%20de%20Almeida.webp" alt="" loading="lazy" /></div>
+            <h3>Daniella de Almeida</h3>
+            <p>Graduanda em Direito pela Unex</p>
+          </li>
+          <li class="rv">
+            <div class="portrait"><img src="img/Equipe/Vinicius.webp" alt="" loading="lazy" /></div>
+            <h3>Vinicius Nogueira</h3>
+            <p>Graduando em Direito pela Unex</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        EcoPoço, projeto de extensão universitária · Vitória da Conquista, BA<br />Fontes:
+        Prefeitura Municipal de Vitória da Conquista e Revista Eletrônica em
+        Educação Ambiental.
+        <p class="footer-credit">
+          <span>by: Filipe Alves</span>
+          <a href="https://www.linkedin.com/in/filipeasj/" aria-label="LinkedIn de Filipe Alves">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8 19H5V9h3v10ZM6.5 7.7a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4ZM19 19h-3v-5c0-1.4-.5-2-1.5-2s-1.5.7-1.5 2v5h-3V9h2.9v1.3A3.2 3.2 0 0 1 15.7 9c2.1 0 3.3 1.3 3.3 3.8V19Z" />
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/filipeasj/" aria-label="Instagram de Filipe Alves, @filipeasj">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+  </body>
+</html>
