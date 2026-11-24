@@ -1,18 +1,24 @@
 :root {
     --bg: #FFFFFF;
     --surface: #D6E9CF;
+    --section-surface: #234735;
+    --section-ink: #f0f7f1;
+    --section-muted: #c5dacb;
+    --section-line: #71977c;
+    --section-card-hover: #315640;
     --ink: #14251C;
     --muted: #2B3F31;
     --moss: #144A22;
     --teal: #0A3D42;
-    --water: #0B6FB0;
+    --water: #69adda;
+    --progress-accent: #657900;
     --line: #9FBE9A;
     --card-hover: #eeeeee;
     --control-hover: #000;
     --control-hover-ink: #fff;
     --hover-duration: .3s;
-    --footer-bg: #102C25;
-    --footer-ink: #E2F1E8;
+    --footer-bg: #000;
+    --footer-ink: #fff;
     box-sizing: border-box;
     --nav-height: calc(68px + env(safe-area-inset-top, 0px));
     --gauge-height: 4px;
@@ -25,17 +31,21 @@
     color-scheme: dark;
     --bg: #07120B;
     --surface: #112419;
+    --section-surface: #0e2017;
+    --section-line: #52765e;
+    --section-card-hover: #292929;
     --ink: #F4FAF5;
     --muted: #C3D6C8;
     --moss: #8EDB9C;
     --teal: #86D6DC;
-    --water: #6CC0F5;
+    --water: #8aff1d;
+    --progress-accent: #d6ed65;
     --line: #34553E;
     --card-hover: #292929;
     --control-hover: #fff;
     --control-hover-ink: #000;
-    --footer-bg: #DCEBDF;
-    --footer-ink: #14251C
+    --footer-bg: #fff;
+    --footer-ink: #000
 }
 
 * {
@@ -79,6 +89,9 @@ a {
 
 #inicio,
 section {
+    min-block-size: 90vh;
+    min-block-size: 90svh;
+    align-content: center;
     padding-block: clamp(52px, 8vw, 110px)
 }
 
@@ -104,7 +117,7 @@ p.lead {
     display: block;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, var(--teal), var(--water));
+    background: var(--progress-accent);
     transform: scaleX(0);
     transform-origin: left
 }
@@ -139,6 +152,7 @@ nav .wrap {
 
 .brand .brand-dark,
 .theme-sun,
+#menu-close,
 #menu-toggle {
     display: none
 }
@@ -151,7 +165,9 @@ nav .wrap {
     display: block
 }
 
-nav ul {
+#nav-links {
+    position: relative;
+    isolation: isolate;
     display: flex;
     gap: clamp(10px, 1.5vw, 20px);
     list-style: none;
@@ -159,12 +175,38 @@ nav ul {
     font-size: .95rem
 }
 
+#nav-links::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    z-index: -1;
+    width: calc(var(--active-width, 0px) + 2 * var(--indicator-inline, 7px));
+    height: calc(var(--active-height, 0px) + 2 * var(--indicator-block, 5px));
+    transform: translate(
+        calc(var(--active-x, 0px) - var(--indicator-inline, 7px)),
+        calc(var(--active-y, 0px) - var(--indicator-block, 5px))
+    );
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--progress-accent) 16%, transparent);
+    opacity: var(--indicator-opacity, 0);
+    pointer-events: none;
+    transition: transform .38s cubic-bezier(.22, 1, .36, 1),
+        width .38s cubic-bezier(.22, 1, .36, 1),
+        opacity .24s ease, background-color .3s ease
+}
+
 nav a {
     text-decoration: none
 }
 
 nav ul a {
-    white-space: nowrap
+    display: block;
+    white-space: nowrap;
+    transition: color var(--hover-duration) ease
+}
+
+#nav-links a[aria-current="location"] {
+    color: var(--moss)
 }
 
 .nav-actions .btn {
@@ -192,42 +234,64 @@ nav ul a {
         overflow-x: clip
     }
 
-    #menu-toggle {
-        display: block
+    html.menu-open {
+        overflow: hidden
     }
 
-    nav ul {
-        position: absolute;
-        inset: var(--page-top) 0 auto auto;
-        width: min(320px, 100%);
-        max-height: calc(100dvh - var(--page-top));
-        flex-direction: column;
-        gap: 4px;
+    #menu-toggle, #menu-close {
+        display: grid;
+        place-items: center
+    }
+
+    .menu-icon {
+        width: 20px;
+        height: 2px;
+        background: currentColor;
+        box-shadow: 0 -6px currentColor, 0 6px currentColor
+    }
+
+    #nav-panel {
+        position: fixed;
+        z-index: 1;
+        inset: 0;
+        height: 100dvh;
         overflow-y: auto;
-        padding: 6px 16px;
+        overscroll-behavior: contain;
+        padding: calc(16px + env(safe-area-inset-top, 0px))
+            calc(20px + env(safe-area-inset-right, 0px))
+            calc(16px + env(safe-area-inset-bottom, 0px))
+            calc(20px + env(safe-area-inset-left, 0px));
         background: var(--bg);
-        border: 1px solid var(--line);
-        border-radius: 0 0 0 20px;
-        box-shadow: 0 16px 32px #08170d26;
         visibility: hidden;
-        opacity: 0;
         transform: translateX(100%);
-        transition: transform .3s ease, opacity .3s ease, visibility .3s
+        transition: transform .35s ease, visibility .35s
     }
 
-    #nav-links.is-open {
+    #nav-panel.is-open {
         visibility: visible;
-        opacity: 1;
         transform: translateX(0)
     }
 
-    #nav-links:not(.is-open) {
-        pointer-events: none
+    #menu-close {
+        border: 0;
+        font-size: 1.6rem
     }
 
-    nav ul a {
-        display: block;
-        padding: 9px 5px
+    #nav-links {
+        --indicator-inline: 0px;
+        --indicator-block: -3px;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0;
+        margin-top: 12px;
+        text-align: right
+    }
+
+    #nav-links a {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+        padding-inline: 8px
     }
 }
 
@@ -268,6 +332,10 @@ nav ul a {
 }
 
 /* hero */
+#inicio {
+    padding-block: clamp(28px, 6vw, 80px) 24px
+}
+
 .hero {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
@@ -286,6 +354,37 @@ nav ul a {
     flex-wrap: wrap;
     gap: 14px;
     margin-top: clamp(12px, 3dvh, 28px)
+}
+
+.scroll-cue {
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-top: -8px;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    color: var(--moss);
+    transition: color .2s ease
+}
+
+.scroll-cue:is(:hover, :focus-visible) {
+    color: var(--progress-accent)
+}
+
+.scroll-cue span {
+    width: 12px;
+    height: 12px;
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    rotate: 45deg;
+    animation: scroll-cue 2.2s ease-in-out infinite
+}
+
+@keyframes scroll-cue {
+    0%, 100% { opacity: 1; transform: translate(-2px, -2px) }
+    50% { opacity: .45; transform: translate(3px, 3px) }
 }
 
 .logo {
@@ -315,7 +414,6 @@ nav ul a {
     object-fit: contain;
     background: var(--bg);
     justify-self: center;
-    box-shadow: 0 12px 26px -8px #174e4966, 0 4px 14px #24619a44
 }
 
 figure img {
@@ -329,10 +427,18 @@ figcaption {
     justify-self: center;
 }
 
+.tint,
+#historia {
+    background: var(--section-surface);
+    color: var(--section-ink)
+}
+
 .tint {
-    background: var(--surface);
-    border-block: 1px solid var(--line);
-    color: var(--moss);
+    border-block: 1px solid var(--section-line)
+}
+
+.tint :is(.lead, figcaption, .note) {
+    color: var(--section-muted)
 }
 
 .tr {
@@ -370,6 +476,7 @@ figcaption {
 }
 
 .car .trk {
+    position: relative;
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -403,41 +510,47 @@ figcaption {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 8px 12px;
     grid-column: 1
 }
 
 .ctl button {
-    width: 48px;
-    height: 48px;
+    min-width: 44px;
+    min-height: 44px;
     border-radius: 50%;
-    border: 2px solid var(--moss);
+    border: 1px solid var(--moss);
     background: var(--bg);
     color: var(--moss);
     font-size: 1.5rem;
     cursor: pointer
 }
 
-.ctl span {
-    font-weight: 700
+.ctl #cn {
+    min-inline-size: 4ch;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-align: center
 }
 
 .team {
     list-style: none;
     padding: 0;
-    margin-top: 24px;
+    max-width: 760px;
+    min-height: max-content;
+    margin: 24px auto 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
-    gap: 16px
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(6px, 1.6vw, 14px)
 }
 
 .team li,
 .advisor {
-    background: var(--bg);
+    color: white;
     border-radius: 20px;
     overflow: hidden;
     text-align: center;
-    box-shadow: 0 8px 24px #08170d12
+    box-shadow: 0 8px 24px #08170daf
 }
 
 .team li {
@@ -463,7 +576,7 @@ figcaption {
 .portrait img {
     display: block;
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 4;
     object-fit: cover;
     object-position: center 30%
 }
@@ -471,7 +584,7 @@ figcaption {
 .team p,
 .advisor p {
     margin-top: 6px;
-    color: var(--muted)
+    color: rgb(223, 223, 223)
 }
 
 .team p {
@@ -558,104 +671,174 @@ figcaption {
     }
 }
 
-/* stats */
-.stats {
-    display: grid;
-    gap: 10px
-}
-
-.stats div {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px clamp(12px, 2vw, 24px);
-    border-radius: 16px;
-    background: var(--teal)
-}
-
-.stats strong {
-    display: block;
-    font: 600 2.6rem var(--font);
-    min-width: 2ch;
-    color: var(--bg)
-}
-
-.stats span {
-    color: var(--bg);
-    font-size: .95rem
-}
-
-.stats :is(strong, span) {
-    transition: color var(--hover-duration) ease
-}
-
 /* history */
-#historia h2 {
-    max-width: 30ch
+#historia {
+    --history-accent: #a4dcb1;
+    --history-progress-accent: #d6ed65
 }
 
-#historia p {
-    font-family: var(--font);
-    font-size: 1rem;
-    line-height: 1.65
-}
-
-.hist-overview {
+.history-intro {
     display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-    gap: clamp(16px, 4vw, 40px);
+    grid-template-columns: minmax(0, 4fr) minmax(0, 5fr);
+    gap: clamp(28px, 6vw, 88px);
     align-items: center
 }
 
-.history-photo {
-    margin-top: clamp(20px, 4vw, 36px);
-    height: clamp(220px, 34vw, 380px)
+.history-label {
+    margin-bottom: 12px;
+    color: var(--history-accent);
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase
 }
 
-.hist {
-    --timeline-gap: clamp(20px, 4vw, 36px);
-    list-style: none;
-    display: grid;
-    gap: 16px;
-    padding-inline-start: var(--timeline-gap);
-    border-inline-start: 2px dashed var(--moss)
+#history-title {
+    max-width: 17ch;
+    font-size: clamp(2rem, 4.6vw, 4rem);
+    line-height: 1.05;
+    color: inherit
 }
 
-.hist-card {
+.history-intro p:last-child,
+.history-milestone p,
+.history-facts dd {
+    color: var(--section-muted);
+    line-height: 1.65
+}
+
+.history-figure {
+    overflow: hidden;
+    border: 1px solid var(--section-line);
+    border-radius: 3% 22% 3% 14% / 4% 26% 4% 20%
+}
+
+.history-figure .history-photo {
+    display: block;
+    aspect-ratio: 4 / 3;
+    border-radius: 0
+}
+
+.history-timeline {
+    --timeline-axis: 0%;
+    --timeline-marker: calc(.55em + 4.5px);
     position: relative;
-    padding: 14px clamp(14px, 3vw, 24px);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    background: var(--bg)
+    isolation: isolate;
+    list-style: none;
+    margin: clamp(40px, 7vw, 96px) auto 0;
+    max-width: 920px;
+    padding: 0
 }
 
-.hist-card::before {
+.history-timeline::before {
     content: "";
     position: absolute;
-    box-sizing: border-box;
-    inset-block-start: 20px;
-    inset-inline-start: calc(-1 * var(--timeline-gap) - 2px);
+    inset-block-start: var(--timeline-marker);
+    inset-inline-start: var(--timeline-axis);
     translate: -50% 0;
-    width: 10px;
-    height: 10px;
-    border: 2px solid var(--bg);
+    z-index: 1;
+    width: 3px;
+    height: var(--timeline-length, 0px);
+    background: linear-gradient(var(--history-accent), var(--history-progress-accent));
+    clip-path: inset(0 0 var(--timeline-unread, 100%) 0);
+    pointer-events: none
+}
+
+.history-milestone {
+    --timeline-axis: 0%;
+    position: relative;
+    padding: 0 0 28px 24px
+}
+
+.history-milestone:last-child {
+    padding-bottom: 0
+}
+
+.history-milestone:not(:last-child)::before,
+.history-milestone::after {
+    content: "";
+    position: absolute;
+    inset-block-start: var(--timeline-marker);
+    inset-inline-start: var(--timeline-axis);
+    translate: -50% 0
+}
+
+.history-milestone:not(:last-child)::before {
+    inset-block-end: calc(-1 * var(--timeline-marker));
+    width: 1px;
+    background: var(--section-line)
+}
+
+.history-milestone::after {
+    z-index: 2;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    background: var(--moss)
+    background: var(--marker-color, var(--history-accent));
+    translate: -50% -50%;
+    transition: background-color .25s ease, box-shadow .25s ease
 }
 
-.hist-card h3 {
+.history-timeline[data-tracking] .history-milestone:not(.is-reached)::after {
+    background: var(--section-line)
+}
+
+.history-milestone[aria-current="step"]::after {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--marker-color) 35%, transparent)
+}
+
+.history-milestone h3 {
+    margin-bottom: 6px;
     font-size: 1.25rem;
-    margin-bottom: 6px
+    color: var(--section-ink);
+    transition: color .25s ease
 }
 
-@media (max-width: 680px) {
-    .hist-overview {
+.history-milestone.is-reached h3 {
+    color: var(--marker-color, var(--history-accent))
+}
+
+.history-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px clamp(32px, 7vw, 84px);
+    margin-top: clamp(36px, 6vw, 72px);
+    padding-top: 20px;
+    border-top: 1px solid var(--section-line)
+}
+
+.history-facts dt {
+    color: var(--history-progress-accent);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700
+}
+
+@media (min-width: 1025px) {
+    .history-timeline {
+        --timeline-axis: 50%
+    }
+
+    .history-milestone {
+        width: 50%;
+        margin-inline-start: 50%;
+        padding-inline-start: 32px
+    }
+
+    .history-milestone:nth-child(odd) {
+        --timeline-axis: 100%;
+        margin-inline-start: 0;
+        padding-inline: 0 32px;
+        text-align: right
+    }
+}
+
+@media (max-width: 767px) {
+    .history-intro {
         grid-template-columns: minmax(0, 1fr)
     }
 }
 
-/* biodiversity */
-
+/* fauna e flora */
 .tabs {
     display: inline-flex;
     border: 2px solid var(--moss);
@@ -740,7 +923,7 @@ figcaption {
 }
 
 .two .pic {
-    height: clamp(105px, 43dvh, 470px)
+    height: clamp(125px, 48dvh, 520px)
 }
 
 .map-link {
@@ -805,7 +988,7 @@ ol.steps b {
 }
 
 footer {
-    padding: 40px 0 calc(40px + env(safe-area-inset-bottom, 0px));
+    padding: 40px 0 calc(12px + env(safe-area-inset-bottom, 0px));
     text-align: center;
     background: var(--footer-bg);
     color: var(--footer-ink);
@@ -818,7 +1001,7 @@ footer {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 4px 8px;
+    gap: 5px;
     margin-top: 12px;
     font-size: .75rem
 }
@@ -837,7 +1020,7 @@ footer {
     height: 15px
 }
 
-:is(.nav-control, .ctl button, .tabs button, .stats div, .sp li) {
+:is(.nav-control, .ctl button, .tabs button, .sp li) {
     transition: background-color var(--hover-duration) ease,
         border-color var(--hover-duration) ease, color var(--hover-duration) ease
 }
@@ -849,31 +1032,26 @@ footer {
 }
 
 @media (hover: hover) and (pointer: fine) {
-    :is(.btn.main, .btn.alt, .nav-control, .ctl button, .tabs button):hover {
+    :is(.btn.main, .btn.alt, .nav-control, .ctl button):hover {
         background-color: var(--control-hover);
         border-color: var(--control-hover);
         color: var(--control-hover-ink)
     }
 
-    nav ul a:hover {
-        color: var(--control-hover);
-        text-decoration: underline
+    nav ul a:not([href="#vida"]):hover {
+        color: var(--moss)
     }
 
     .btn:hover {
         transform: translateY(-3px)
     }
 
-    :is(.hist-card, .team li, .advisor, .sp li):hover {
+    :is(.team li, .advisor):hover {
+        background-color: var(--section-card-hover)
+    }
+
+    .sp li:hover {
         background-color: var(--card-hover)
-    }
-
-    .stats div:hover {
-        background-color: var(--control-hover)
-    }
-
-    .stats div:hover :is(strong, span) {
-        color: var(--control-hover-ink)
     }
 }
 
@@ -911,7 +1089,7 @@ footer {
     }
 
     .two .pic {
-        height: clamp(90px, 30dvh, 280px)
+        height: clamp(110px, 34dvh, 320px)
     }
 }
 
@@ -962,9 +1140,24 @@ footer {
         grid-row: 3
     }
 
-    .team {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px
+    .team li {
+        border-radius: 12px;
+        padding-bottom: 8px
+    }
+
+    .team h3 {
+        margin-top: 8px;
+        font-size: clamp(.75rem, 2.6vw, .9rem)
+    }
+
+    .team p {
+        font-size: clamp(.7rem, 2.35vw, .8rem);
+        line-height: 1.3
+    }
+
+    .team h3,
+    .team p {
+        padding-inline: 4px
     }
 
     .advisor {

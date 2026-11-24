@@ -22,24 +22,27 @@
           ><img class="brand-light" src="img/Logotipos/Logo_tema_claro.png" alt="" />
           <img class="brand-dark" src="img/Logotipos/Logo_tema_escuro.png" alt=""
         /></a>
-        <ul id="nav-links">
-          <li><a href="#inicio">Início</a></li>
-          <li><a href="#historia">História</a></li>
-          <li><a href="#vida">Fauna e flora</a></li>
-          <li><a href="#galeria">Galeria</a></li>
-          <li><a href="#local">Localização</a></li>
-          <li><a href="#trilhas">Trilhas</a></li>
-          <li><a href="#visita">Agende</a></li>
-          <li><a href="#equipe">Equipe</a></li>
-        </ul>
+        <div id="nav-panel">
+          <button class="nav-control" id="menu-close" type="button" aria-label="Fechar menu">×</button>
+          <ul id="nav-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#historia">Sobre</a></li>
+            <li><a href="#vida">Fauna e flora</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#local">Localização</a></li>
+            <li><a href="#trilhas">Trilhas</a></li>
+            <li><a href="#visita">Agende</a></li>
+            <li><a href="#equipe">Equipe</a></li>
+          </ul>
+        </div>
         <div class="nav-actions">
           <a class="btn main nav-visit" href="#visita">Visitar</a>
           <button class="nav-control" id="theme-toggle" type="button" aria-label="Tema escuro" aria-pressed="false">
             <span class="theme-moon" aria-hidden="true">☾</span>
             <span class="theme-sun" aria-hidden="true">☀</span>
           </button>
-          <button class="nav-control" id="menu-toggle" type="button" aria-controls="nav-links" aria-expanded="false">
-            Menu
+          <button class="nav-control" id="menu-toggle" type="button" aria-controls="nav-panel" aria-expanded="false" aria-label="Abrir menu">
+            <span class="menu-icon" aria-hidden="true"></span>
           </button>
         </div>
       </div>
@@ -65,38 +68,64 @@
           src="img/Local/Vista_aerea.webp"
           alt="Vista aérea da mata da reserva cercada pelos bairros da cidade"
         />
+        <a class="scroll-cue" href="#historia" aria-label="Descer até a história da reserva">
+          <span aria-hidden="true"></span>
+        </a>
       </div>
     </header>
 
-    <section id="historia" class="tint">
+    <section id="historia" aria-labelledby="history-title">
       <div class="wrap">
-        <h2 class="rv" style="margin-bottom: 50px;">Poço Escuro: O berço de águas e memórias de Vitória da Conquista</h2>
-        <div class="hist-overview">
-          <ol class="hist">
-            <li class="hist-card rv">
-              <h3>As nascentes e o Arraial</h3>
-              <p>Na Serra do Periperi nascem as principais fontes do Rio Verruga, em torno das quais cresceu o Arraial da Conquista. A sombra da mata sobre as águas profundas deu nome ao Poço Escuro.</p>
-            </li>
-            <li class="hist-card rv">
-              <h3>A água no cotidiano da cidade</h3>
-              <p>Até meados da década de 1970, as nascentes abasteciam a população. Aguadeiros e famílias buscavam água, enquanto lavadeiras trabalhavam às margens do riacho.</p>
-            </li>
-            <li class="hist-card rv">
-              <h3>A criação da reserva em 1996</h3>
-              <p>Com a expansão urbana, a mata tornou-se o último grande remanescente nativo da cidade. Em 1996, a reserva foi criada e integrada ao Parque Municipal da Serra do Periperi.</p>
-            </li>
-            <li class="hist-card rv">
-              <h3>O Poço Escuro hoje</h3>
-              <p>Aberta à comunidade, a reserva preserva nascentes e espécies nativas e recebe atividades de pesquisa e educação ambiental.</p>
-            </li>
-          </ol>
-          <div class="stats rv">
-            <div><strong data-n="17">0</strong><span>hectares de mata ciliar</span></div>
-            <div><strong data-n="3">0</strong><span>biomas reunidos: Mata Atlântica, Mata de Cipó e Caatinga</span></div>
-            <div><strong data-n="3">0</strong><span>trilhas oficiais</span></div>
+        <div class="history-intro">
+          <div class="rv">
+            <p class="history-label">Nossa história</p>
+            <h2 id="history-title">Onde a natureza guarda a história de uma cidade</h2>
+            <p>Das nascentes que ajudaram a formar Vitória da Conquista à criação da reserva, o Poço Escuro reune Mata Atlântica, Mata de Cipó e Caatinga em um só lugar!</p>
           </div>
+          <figure class="history-figure rv">
+            <img class="pic history-photo" src="img/Local/inicio_parque.webp" alt="Entrada do parque do Poço Escuro" loading="lazy" />
+          </figure>
         </div>
-        <img class="pic history-photo rv" src="img/Local/inicio_parque.webp" alt="Início do parque do Poço Escuro" />
+        <ol class="history-timeline" role="list">
+          <li class="history-milestone">
+            <div class="rv">
+              <h3>As origens da cidade</h3>
+              <p>Na Serra do Periperi, as nascentes que alimentam o Rio Verruga contribuíram para o desenvolvimento do antigo Arraial da Conquista. A vegetação densa, que projetava sombras sobre as águas, inspirou o nome Poço Escuro.</p>
+            </div>
+          </li>
+          <li class="history-milestone">
+            <div class="rv">
+              <h3>A água que abastecia gerações</h3>
+              <p>Durante décadas, as nascentes fizeram parte da rotina da população, sendo utilizadas para abastecimento e atividades cotidianas.</p>
+            </div>
+          </li>
+          <li class="history-milestone">
+            <div class="rv">
+              <h3>A preservação em 1996</h3>
+              <p>Com o avanço da urbanização, a proteção da vegetação nativa tornou-se essencial. Em 1996, foi criada a Reserva Florestal do Poço Escuro e em 1999 foi integrada ao Parque Municipal da Serra do Periperi.</p>
+            </div>
+          </li>
+          <li class="history-milestone">
+            <div class="rv">
+              <h3>Um patrimônio vivo</h3>
+              <p>Atualmente, a reserva protege nascentes, abriga biodiversidade e representa um espaço importante para a memória, a pesquisa e a educação ambiental.</p>
+            </div>
+          </li>
+        </ol>
+        <dl class="history-facts rv" style="justify-self: center;">
+          <div>
+            <dt>17 hectares</dt>
+            <dd>de área protegida</dd>
+          </div>
+          <div>
+            <dt>1996</dt>
+            <dd>ano de criação da reserva</dd>
+          </div>
+          <div>
+            <dt>3</dt>
+            <dd>trilhas oficiais</dd>
+          </div>
+        </dl>
       </div>
     </section>
 
@@ -184,9 +213,9 @@
             <p class="lead">Nascentes, trilhas e visitas guiadas na Reserva do Poço Escuro.</p>
           </div>
           <div class="ctl">
-            <button id="pv" aria-label="Foto anterior">‹</button
-            ><span id="cn">1 / 9</span
-            ><button id="nx" aria-label="Próxima foto">›</button>
+            <button id="pv" type="button" aria-label="Foto anterior" aria-controls="trk">‹</button>
+            <span id="cn" role="status" aria-live="off">1 / 9</span>
+            <button id="nx" type="button" aria-label="Próxima foto" aria-controls="trk">›</button>
           </div>
         </div>
       </div>
@@ -241,7 +270,7 @@
           <ul class="tr">
             <li><i style="background: #7a1a1a"></i>Trilha 01<b>650 m</b></li>
             <li><i style="background: #d9b800"></i>Trilha 02<b>570 m</b></li>
-            <li><i style="background: #8a8a8a"></i>Trilha 03<b>520 m</b></li>
+            <li><i style="background: #f3f3f3"></i>Trilha 03<b>520 m</b></li>
             <li><i style="background: var(--water)"></i>Rio Verruga</li>
           </ul>
         </div>
@@ -259,23 +288,23 @@
         <p class="lead rv">
         <ol class="steps rv">
           <li>
-            <b>Consulte as datas pelo WhatsApp</b>Use o botão de WhatsApp
+            <b>Consulte as datas</b>Use o botão de WhatsApp
             abaixo para falar com o Módulo de Educação Ambiental da SEMMA
-            pelo número (77) 3229-3591 e consultar os horários disponíveis.
+            e consultar os horários disponíveis.
           </li>
           <li>
-            <b>Peça autorização por e-mail</b>Use o botão de e-mail abaixo
+            <b>Peça autorização</b>Use o botão de e-mail abaixo
             para enviar à SEMMA um ofício com a data, o turno, o horário,
             o número de participantes e o motivo da visita.
           </li>
           <li>
-            <b>Solicite o acompanhamento na trilha</b>Após receber a autorização
+            <b>Solicite acompanhamento</b>Após receber a autorização
             da SEMMA, entregue um ofício ao GAMA na
             sede da Guarda Municipal (Rua Dom Climério de Andrade, 108,
             Recreio).
           </li>
           <li>
-            <b>No dia</b>Palestra na Sala Verde, na Praça da Juventude, e depois
+            <b>Lembre-se no dia</b>Palestra na Sala Verde, na Praça da Juventude, e depois
             trilha com a Guarda Municipal Ambiental.
           </li>
         </ol>
@@ -311,13 +340,7 @@
           Projeto de extensão universitária para dar visibilidade a um
           patrimônio natural de Vitória da Conquista.
         </p>
-        <article class="advisor rv">
-          <div class="portrait"><img src="img/Equipe/Thaiane.webp" alt="" loading="lazy" /></div>
-          <div class="advisor-copy">
-            <h3>Thaiane Dutra</h3>
-            <p>Orientadora, advogada, professora mestre em Linguística (2018) e doutoranda em Memória, Linguagem e Sociedade pela Universidade Estadual do Sudoeste da Bahia (UESB). Bacharel em Direito pela Universidade Estadual do Sudoeste da Bahia (2009). Especialização em Direito Civil e Processo Civil. É avaliadora ad hoc INEP/MEC para os Cursos de graduação em Direito. Líder do Grupo de Estudos e Análise de Dados do Poder Judiciário - GEADPJ e do Laboratório de Análise de Dados do Poder Judiciário LADPJ, inscrito no CNPq.</p>
-          </div>
-        </article>
+
         <ul class="team">
           <li class="rv">
             <div class="portrait"><img src="img/Equipe/Daniela.webp" alt="" loading="lazy" /></div>
@@ -327,11 +350,6 @@
           <li class="rv">
             <div class="portrait"><img src="img/Equipe/Inoc%C3%AAncio.webp" alt="" loading="lazy" /></div>
             <h3>Inocêncio de Souza</h3>
-            <p>Graduando em Direito pela Unex</p>
-          </li>
-          <li class="rv">
-            <div class="portrait"><img src="img/Equipe/Hugo.webp" alt="" loading="lazy" /></div>
-            <h3>Hugo Lacerda</h3>
             <p>Graduando em Direito pela Unex</p>
           </li>
           <li class="rv">
@@ -354,7 +372,18 @@
             <h3>Vinicius Nogueira</h3>
             <p>Graduando em Direito pela Unex</p>
           </li>
+          <li class="rv">
+            <div class="portrait"><img src="img/Equipe/Hugo.webp" alt="" loading="lazy" /></div>
+            <h3>Hugo Lacerda</h3>
+            <p>Graduando em Administração pela Unex</p>
+          </li>
+            <li class="rv">
+            <div class="portrait"><img src="img/Equipe/Thaiane.webp" alt="" loading="lazy" /></div>
+            <h3>Thaiane Dutra</h3>
+            <p>Orientadora, advogada e professora</p>
+          </li>
         </ul>
+
       </div>
     </section>
 
@@ -364,7 +393,7 @@
         Prefeitura Municipal de Vitória da Conquista e Revista Eletrônica em
         Educação Ambiental.
         <p class="footer-credit">
-          <span>by: Filipe Alves</span>
+          <span>Site desenvolvido por Filipe Alves</span>
           <a href="https://www.linkedin.com/in/filipeasj/" aria-label="LinkedIn de Filipe Alves">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8 19H5V9h3v10ZM6.5 7.7a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4ZM19 19h-3v-5c0-1.4-.5-2-1.5-2s-1.5.7-1.5 2v5h-3V9h2.9v1.3A3.2 3.2 0 0 1 15.7 9c2.1 0 3.3 1.3 3.3 3.8V19Z" />
